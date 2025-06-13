@@ -5,11 +5,11 @@ app = Flask(__name__, static_folder='static')
 
 @app.route('/')
 def index():
-    return send_from_directory(app.static_folder, 'index.html')
+    return send_from_directory('static', 'index.html')
 
-@app.route('/<path:path>')
-def static_proxy(path):
-    return send_from_directory(app.static_folder, path)
+@app.route('/assets/<path:path>')
+def serve_assets(path):
+    return send_from_directory('static/assets', path)
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 10000))
